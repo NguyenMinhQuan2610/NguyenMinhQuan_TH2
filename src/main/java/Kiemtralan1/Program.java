@@ -8,7 +8,7 @@ package Kiemtralan1;
  *
  * @author ADMIN
  */
-public class Main {
+public class Program {
 
     /**
      * @param args the command line arguments

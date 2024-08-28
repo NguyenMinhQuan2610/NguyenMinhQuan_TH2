@@ -5,6 +5,7 @@
 package Kiemtralan1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.List;
@@ -28,30 +29,31 @@ public class QuanLyCD {
 
         int chon = 0;
         while (chon != 8) {
-            System.out.println("======Quan Ly CD======"
+            System.out.print("======Quan Ly CD======"
                     + "\n1.Xuat toan bo CD va tong tri gia CD"
                     + "\n2.Lay cac CD phat hanh truoc nam 2022"
                     + "\n3.Tim cac CD co chu tinh trong ten"
                     + "\n4.Sap xep CD theo gia giam dan"
                     + "\n5.Xoa CD theo ma so"
                     + "\n6.Sua gia ban cua CD theo ma so"
-                    +"\n7.Tong cac gia tri CD "
-                    +"\nChon hanh dong muon thuc hien: ");
+                    + "\n7.Tong cac gia tri CD "
+                    + "\nChon hanh dong muon thuc hien: ");
             chon = sc.nextInt();
             switch (chon) {
                 case 1:
                     Xuat();
                     break;
                 case 2:
-                    for(CD cd:listCD){
-                    if (cd.getNamphathanh() < 2020) {
-                        Xuat();
-                    }}
+                    for (CD cd : listCD) {
+                        if (cd.getNamphathanh() < 2020) {
+                            System.out.println(cd);
+                        }
+                    }
                     break;
                 case 3:
                     for (CD cd : listCD) {
                         if (cd.getTenCD().contains("tinh")) {
-                            Xuat();
+                            System.out.println(cd);
                         }
                     }
                     break;
@@ -67,7 +69,7 @@ public class QuanLyCD {
                 case 7:
                     TinhTong();
                     break;
-                
+
             }
 
         }
@@ -75,23 +77,25 @@ public class QuanLyCD {
     }
 
     public static void Xuat() {
-        int tong=0;
-        for(CD cd:listCD)
-            tong+=cd.getGiaban();
+        int tong = 0;
+        for (CD cd : listCD) {
+            tong += cd.getGiaban();
+        }
+        System.out.println("Tong gia tri cd: " + tong);
         for (CD cd : listCD) {
             System.out.println("\nMa so: " + cd.getMaso()
                     + "\nTen CD: " + cd.getTenCD()
                     + "\nCa si: " + cd.getCasi()
                     + "\nGia ban: " + cd.getGiaban()
                     + "\nNam phat hanh: " + cd.getNamphathanh()
-                    + "\nTong gia tri cd: " + tong);
+            );
         }
     }
 
     public static void timKiemCD() {
         CD timkiem = null;
         sc.nextLine();
-        System.out.println("Nhap ma so muon tim");
+        System.out.print("Nhap ma so muon tim");
         String Masotim = sc.nextLine();
         for (CD cd : listCD) {
             if (cd.getMaso().equalsIgnoreCase(Masotim)) {
@@ -106,19 +110,26 @@ public class QuanLyCD {
             System.out.println("Khong tim thay");
         }
     }
-    public static void SapXepGiamDan(){
-        Comparator<CD> cd=new Comparator<CD>(){
+
+    public static void SapXepGiamDan() {
+        Comparator<CD> cd = new Comparator<CD>() {
             @Override
-            public int compare(CD Cd1,CD cd2){
-                return Double.compare(cd2.getGiaban(),Cd1.getGiaban());
+            public int compare(CD Cd1, CD cd2) {
+                return Double.compare(cd2.getGiaban(), Cd1.getGiaban());
             }
         };
+        Collections.sort(listCD, cd);
+        for (CD cd1 : listCD) {
+            System.out.println(cd.toString());
+        }
     }
-    public static void TinhTong(){
-        int tong=0;
-        for(CD cd:listCD)
-            tong+=cd.getGiaban();
-        Xuat();
+
+    public static void TinhTong() {
+        int tong = 0;
+        for (CD cd : listCD) {
+            tong += cd.getGiaban();
+        }
+        System.out.println("Tong gia ban: " + tong);
     }
 
 }
